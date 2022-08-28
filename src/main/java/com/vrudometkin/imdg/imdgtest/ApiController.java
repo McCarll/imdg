@@ -1,10 +1,7 @@
 package com.vrudometkin.imdg.imdgtest;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -16,8 +13,8 @@ public class ApiController {
         return service.getById(id);
     }
 
-    @PostMapping("/{id}/{price}")
-    public void get(@PathVariable String id, @PathVariable String price) {
+    @PutMapping("/{id}/{price}")
+    public void updatePrice(@PathVariable String id, @PathVariable String price) {
         service.updatePrice(id, price);
     }
 }

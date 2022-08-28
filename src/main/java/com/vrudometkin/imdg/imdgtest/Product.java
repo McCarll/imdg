@@ -3,7 +3,6 @@ package com.vrudometkin.imdg.imdgtest;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 public class Product {

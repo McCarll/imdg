@@ -1,27 +1,29 @@
 package com.vrudometkin.imdg.imdgtest;
 
-import org.springframework.cache.annotation.EnableCaching;
+import org.apache.ignite.Ignition;
+import org.apache.ignite.client.ClientCache;
+import org.apache.ignite.client.ClientCacheConfiguration;
+import org.apache.ignite.client.IgniteClient;
+import org.apache.ignite.configuration.ClientConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.cassandra.core.cql.WriteOptions;
-import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+import javax.cache.expiry.ExpiryPolicy;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
-@EnableCaching
-@EnableCassandraRepositories
 public class IgniteCacheConfiguration {
     @Bean
-    public CassandraMappingContext cassandraMapping() {
-        return new CassandraMappingContext();
-    }
-
-    @Bean
-    WriteOptions writeOptions() {
-        WriteOptions writeOptions = WriteOptions.builder().ttl(Duration.of(60, ChronoUnit.SECONDS)).build();
-        return writeOptions;
+    ClientCache cache(){
+        ClientConfiguration cfg = new ClientConfiguration();
+        cfg.setAddresses("127.0.0.1:10800");
+        ClientCacheConfiguration cacheConfiguration = new ClientCacheConfiguration();
+        cacheConfiguration.setName("product_id1");
+        ExpiryPolicy expiryPolicy = new CreatedExpiryPolicy(new Duration(TimeUnit.SECONDS, 10));
+        cacheConfiguration.setExpiryPolicy(expiryPolicy);
+        IgniteClient igniteClient = Ignition.startClient(cfg);
+        return igniteClient.getOrCreateCache(cacheConfiguration);
     }
 }

@@ -9,3 +9,50 @@ services:
       - ~/apps/cassandra:/var/lib/cassandra
     environment:
       - CASSANDRA_CLUSTER_NAME=citizix
+  ignite-01:
+    image: apacheignite/ignite:2.1.0
+    environment:
+      - CONFIG_URI=file:///opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config/docker-ignite.xml
+      - JVM_OPTS=-Xms512m -Xmx512m -server -XX:+AggressiveOpts -XX:+UseG1GC -XX:MaxPermSize=256m -XX:+DisableExplicitGC -DIGNITE_PERFORMANCE_SUGGESTIONS_DISABLED=true
+    expose:
+      - "47500-47509"
+#    networks:
+#      - ignite
+    volumes:
+      - "./config:/opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config"
+
+  ignite-02:
+    image: apacheignite/ignite:2.1.0
+    environment:
+      - CONFIG_URI=file:///opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config/docker-ignite.xml
+      - JVM_OPTS=-Xms512m -Xmx512m -server -XX:+AggressiveOpts -XX:+UseG1GC -XX:MaxPermSize=256m -XX:+DisableExplicitGC -DIGNITE_PERFORMANCE_SUGGESTIONS_DISABLED=true
+    expose:
+      - "47500-47509"
+#    networks:
+#      - ignite
+    volumes:
+      - "./config:/opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config"
+
+  ignite-03:
+    image: apacheignite/ignite:2.1.0
+    environment:
+      - CONFIG_URI=file:///opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config/docker-ignite.xml
+      - JVM_OPTS=-Xms512m -Xmx512m -server -XX:+AggressiveOpts -XX:+UseG1GC -XX:MaxPermSize=256m -XX:+DisableExplicitGC -DIGNITE_PERFORMANCE_SUGGESTIONS_DISABLED=true
+    expose:
+      - "47500-47509"
+#    networks:
+#      - ignite
+    volumes:
+      - "./config:/opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config"
+
+  ignite-04:
+    image: apacheignite/ignite:2.1.0
+    environment:
+      - CONFIG_URI=file:///opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config/docker-ignite.xml
+      - JVM_OPTS=-Xms512m -Xmx512m -server -XX:+AggressiveOpts -XX:+UseG1GC -XX:MaxPermSize=256m -XX:+DisableExplicitGC -DIGNITE_PERFORMANCE_SUGGESTIONS_DISABLED=true
+    expose:
+      - "47500-47509"
+#    networks:
+#      - ignite
+    volumes:
+      - "./config:/opt/ignite/apache-ignite-fabric-2.1.0-bin/data2day/config"
